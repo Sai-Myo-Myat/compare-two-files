@@ -1,0 +1,3 @@
+/home/saimyomyat/CLionProjects/calculate_diffetrnce_between_2files/cmake-build-debug/CMakeFiles/calculate_diffetrnce_between_2files.dir
+/home/saimyomyat/CLionProjects/calculate_diffetrnce_between_2files/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/saimyomyat/CLionProjects/calculate_diffetrnce_between_2files/cmake-build-debug/CMakeFiles/rebuild_cache.dir
