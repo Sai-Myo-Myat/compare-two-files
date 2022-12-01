@@ -1,33 +1,42 @@
 #include "iostream"
+
 using namespace std;
 
 class MyClass{
-public:
-    int firstdata=10;
-    string name[10]={"win","ncc"};
-    // behaviour
-    void showData(){
 
-        cout<<"this is from showData Function"<<endl;
+struct aa {
+}
+}
+
+public:
+    int age;
+    string name;
+    int amount;
+    MyClass(int dage , string dname , int damount){
+
+        age = dage ;
+        name = dname;
+        amount = damount;
+        getData();
+        FILE *fptr;
+
+    }
+    void getData(){
+    float n;
+    }
+
+        cout<<"age"<<age<<endl;
+        cout<<"name"<<name<<endl;
+        cout<<"amount"<<amount<<endl;
+
     }
 };
-void main(){
-    MyClass classObj;
-    MyClass obj2;
-    string data;
-    cout<<"Enter yourname:";
-    cin>>data;
-    int chararr [100];
-    char arr[100]
-    double aa;
 
-    classObj.name[0]=data;
-    obj2.name[0]="National";
+int main(){
 
-    cout<<"data "<<classObj.name[0]<<endl;
-    cout<<"data "<<obj2.name[0]<<endl;
+    char aa[100];
 
-    classObj.showData();
+    MyClass obj(20 , "mgmg" , 100);
 
     return 0;
 }

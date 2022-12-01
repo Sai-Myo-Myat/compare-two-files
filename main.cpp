@@ -16,6 +16,11 @@ struct structure {
     int numOfFile;
     int numOfFunction = 0;
     int numOfArray = 0;
+    int numOfCharArray = 0;
+    int numOfIntArray = 0;
+    int numOfCharPointer = 0;
+    int numOfIntPointer = 0;
+    int numOfFilePointer = 0;
     int numOfPointer = 0;
 };
 
@@ -58,6 +63,18 @@ int main () {
     checkDataType();
     compare();
     calculatePercentage ();
+
+    for (int i = 0; i < 1; ++i) {
+        printf("num of int = file one: %d vs file two %d\n",structureOne.numOfInt, structureTwo.numOfInt);
+        printf("num of char = file one: %d vs file two %d\n",structureOne.numOfChar, structureTwo.numOfChar);
+        printf("num of float = file one: %d vs file two %d\n",structureOne.numOfFloat, structureTwo.numOfFloat);
+        printf("num of double = file one: %d vs file two %d\n",structureOne.numOfDouble, structureTwo.numOfDouble);
+        printf("num of FILE = file one: %d vs file two %d\n",structureOne.numOfFile, structureTwo.numOfFile);
+        printf("num of Function = file one: %d vs file two %d\n",structureOne.numOfFunction, structureTwo.numOfFunction);
+        printf("num of pointer = file one: %d vs file two %d\n",structureOne.numOfPointer, structureTwo.numOfPointer);
+        printf("num of Array = file one: %d vs file two %d\n",structureOne.numOfArray, structureTwo.numOfArray);
+        printf("num of Struct = file one: %d vs file two %d\n",structureOne.numOfStruct, structureTwo.numOfStruct);
+    }
 }
 
 void readFile (char fileName[100]) {
@@ -100,8 +117,6 @@ void checkDataType() {
                 int j = i + 4;
                 findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction,structureOne.numOfArray, structureOne.numOfPointer);
 
-            }else if (structureOne.characters[i] == '*'){
-
             }
             else if (structureOne.characters[i] == 'c'  && structureOne.characters[i+1] == 'h'  && structureOne.characters[i+2] == 'a' && structureOne.characters[i+3] == 'r' && structureOne.characters[i+4] == ' '){
                 structureOne.numOfChar += 1;
@@ -110,7 +125,7 @@ void checkDataType() {
 
             }else if (structureOne.characters[i] == 's'  && structureOne.characters[i+1] == 't'  && structureOne.characters[i+2] == 'r' && structureOne.characters[i+3] == 'u' && structureOne.characters[i+4] == 'c' && structureOne.characters[i+5] == 't' && structureOne.characters[i+6] == ' '){
                 structureOne.numOfStruct += 1;
-            }else if (structureOne.characters[i] == 'f'  && structureOne.characters[i+1] == 'l'  && structureOne.characters[i+2] == 'o' && structureOne.characters[i+3] == 'u' && structureOne.characters[i+4] == 'a' && structureOne.characters[i+5] == 't' && structureOne.characters[i+6] == ' '){
+            }else if (structureOne.characters[i] == 'f'  && structureOne.characters[i+1] == 'l'  && structureOne.characters[i+2] == 'o' && structureOne.characters[i+3] == 'a' && structureOne.characters[i+4] == 't' && structureOne.characters[i+5] == ' '){
                 structureOne.numOfFloat += 1;
             }else if (structureOne.characters[i] == 'd'  && structureOne.characters[i+1] == 'o'  && structureOne.characters[i+2] == 'u' && structureOne.characters[i+3] == 'b' && structureOne.characters[i+4] == 'l' && structureOne.characters[i+5] == 'e' && structureOne.characters[i+6] == ' '){
                 structureOne.numOfDouble += 1;
@@ -136,7 +151,7 @@ void checkDataType() {
 
             }else if (structureTwo.characters[i] == 's'  && structureTwo.characters[i+1] == 't'  && structureTwo.characters[i+2] == 'r' && structureTwo.characters[i+3] == 'u' && structureTwo.characters[i+4] == 'c' && structureTwo.characters[i+5] == 't' && structureTwo.characters[i+6] == ' ') {
                 structureTwo.numOfStruct += 1;
-            }else if (structureTwo.characters[i] == 'f'  && structureTwo.characters[i+1] == 'l'  && structureTwo.characters[i+2] == 'o' && structureTwo.characters[i+3] == 'u' && structureTwo.characters[i+4] == 'a' && structureTwo.characters[i+5] == 't' && structureTwo.characters[i+6] == ' '){
+            }else if (structureTwo.characters[i] == 'f'  && structureTwo.characters[i+1] == 'l'  && structureTwo.characters[i+2] == 'o'  && structureTwo.characters[i+3] == 'a' && structureTwo.characters[i+4] == 't' && structureTwo.characters[i+5] == ' '){
                 structureTwo.numOfFloat += 1;
             }else if (structureTwo.characters[i] == 'd'  && structureTwo.characters[i+1] == 'o'  && structureTwo.characters[i+2] == 'u' && structureTwo.characters[i+3] == 'b' && structureTwo.characters[i+4] == 'l' && structureTwo.characters[i+5] == 'e' && structureTwo.characters[i+6] == ' '){
                 structureTwo.numOfDouble += 1;
@@ -190,14 +205,31 @@ void compare() {
 
 
 void findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArray, int numOfPointer) {
-    while (arr[j+1] == '=') {
+    while (arr[j+1] != '=') {
         if (arr[j] == '('){
-            numOfFunction++;
+            ++numOfFunction;
+            if (gIndex == 0){
+                structureOne.numOfFunction = numOfFunction;
+            }else if (gIndex == 1){
+                structureTwo.numOfFunction = numOfFunction;
+            }
             break;
         }else if (arr[j] == '['){
             numOfArray++;
+            if (gIndex == 0){
+                structureOne.numOfArray = numOfArray;
+            }else if (gIndex == 1){
+                structureTwo.numOfArray = numOfArray;
+            }
+            break;
         }else if (arr[j] == '*') {
             numOfPointer++;
+            if (gIndex == 0){
+                structureOne.numOfPointer = numOfPointer;
+            }else if (gIndex == 1){
+                structureTwo.numOfPointer = numOfPointer;
+            }
+            break ;
         }
         j++;
     }
@@ -223,5 +255,6 @@ void  calculatePercentage () {
                         + percentStruct.percentOfDouble + percentStruct.percentOfFile + percentStruct.percentOfFunction
                         + percentStruct.percentOfArray + percentStruct.percentOfPointer;
     percentage = (comparedPercent*100)/fullPercentage;
-    printf("%d (percent) same!!!",percentage);
+    printf("%d (percent) same!!\n",percentage);
 }
+
