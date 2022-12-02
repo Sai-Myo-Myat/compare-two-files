@@ -13,15 +13,19 @@ struct structure {
     int numOfStruct;
     int numOfFloat;
     int numOfDouble;
+    int numOfVoid;
     int numOfFile;
-    int numOfFunction = 0;
-    int numOfArray = 0;
-    int numOfCharArray = 0;
-    int numOfIntArray = 0;
-    int numOfCharPointer = 0;
-    int numOfIntPointer = 0;
-    int numOfFilePointer = 0;
-    int numOfPointer = 0;
+    int numOfFunction;
+    int numOfArray;
+    int numOfCharArray;
+    int numOfIntArray;
+    int numOfCharPointer;
+    int numOfIntPointer;
+    int numOfFilePointer;
+    int numOfPointer;
+    int numOfCharFunction;
+    int numOfIntFunction;
+    int numOfVoidFunction;
 };
 
 struct structureTwo {
@@ -46,7 +50,11 @@ int percentage;
 
 void readFile (char fileName[100]);
 void checkDataType();
-void findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArray, int numOfPointer);
+int findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArray, int numOfPointer);
+void checkArrayType(int arrType);
+void checkPointerType(int pointerType);
+void checkFunctionType(int functionType);
+void increasingFun(int result, int type);
 void compare();
 int calculateEachPercentage (int numOne, int numTwo);
 void  calculatePercentage ();
@@ -69,12 +77,23 @@ int main () {
         printf("num of char = file one: %d vs file two %d\n",structureOne.numOfChar, structureTwo.numOfChar);
         printf("num of float = file one: %d vs file two %d\n",structureOne.numOfFloat, structureTwo.numOfFloat);
         printf("num of double = file one: %d vs file two %d\n",structureOne.numOfDouble, structureTwo.numOfDouble);
+        printf("num of void = file one: %d vs file two %d\n",structureOne.numOfVoid, structureTwo.numOfVoid);
         printf("num of FILE = file one: %d vs file two %d\n",structureOne.numOfFile, structureTwo.numOfFile);
         printf("num of Function = file one: %d vs file two %d\n",structureOne.numOfFunction, structureTwo.numOfFunction);
         printf("num of pointer = file one: %d vs file two %d\n",structureOne.numOfPointer, structureTwo.numOfPointer);
         printf("num of Array = file one: %d vs file two %d\n",structureOne.numOfArray, structureTwo.numOfArray);
         printf("num of Struct = file one: %d vs file two %d\n",structureOne.numOfStruct, structureTwo.numOfStruct);
+        printf("num of charArray = file one: %d vs file two %d\n",structureOne.numOfCharArray, structureTwo.numOfCharArray);
+        printf("num of intArray = file one: %d vs file two %d\n",structureOne.numOfIntArray, structureTwo.numOfIntArray);
+        printf("num of intFun = file one: %d vs file two %d\n",structureOne.numOfIntFunction, structureTwo.numOfIntFunction);
+        printf("num of charFun = file one: %d vs file two %d\n",structureOne.numOfCharFunction, structureTwo.numOfCharFunction);
+        printf("num of voidFun = file one: %d vs file two %d\n",structureOne.numOfVoidFunction, structureTwo.numOfVoidFunction);
+        printf("num of intPinter = file one: %d vs file two %d\n",structureOne.numOfIntPointer, structureTwo.numOfIntPointer);
+        printf("num of charPointer = file one: %d vs file two %d\n",structureOne.numOfCharPointer, structureTwo.numOfCharPointer);
+        printf("num of FilePointer = file one: %d vs file two %d\n",structureOne.numOfFilePointer, structureTwo.numOfFilePointer);
     }
+
+    return 0;
 }
 
 void readFile (char fileName[100]) {
@@ -114,15 +133,15 @@ void checkDataType() {
         if (gIndex == 0){
             if (structureOne.characters[i] == 'i'  && structureOne.characters[i+1] == 'n'  && structureOne.characters[i+2] == 't' && structureOne.characters[i+3] == ' '){
                 structureOne.numOfInt += 1;
-                int j = i + 4;
-                findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction,structureOne.numOfArray, structureOne.numOfPointer);
-
+                int j = i + 2;
+                int result = findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction,structureOne.numOfArray, structureOne.numOfPointer);
+                increasingFun(result,2);
             }
             else if (structureOne.characters[i] == 'c'  && structureOne.characters[i+1] == 'h'  && structureOne.characters[i+2] == 'a' && structureOne.characters[i+3] == 'r' && structureOne.characters[i+4] == ' '){
                 structureOne.numOfChar += 1;
-                int j = i + 5;
-                findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction, structureOne.numOfArray, structureOne.numOfPointer);
-
+                int j = i + 3;
+                int result = findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction, structureOne.numOfArray, structureOne.numOfPointer);
+                increasingFun(result,1);
             }else if (structureOne.characters[i] == 's'  && structureOne.characters[i+1] == 't'  && structureOne.characters[i+2] == 'r' && structureOne.characters[i+3] == 'u' && structureOne.characters[i+4] == 'c' && structureOne.characters[i+5] == 't' && structureOne.characters[i+6] == ' '){
                 structureOne.numOfStruct += 1;
             }else if (structureOne.characters[i] == 'f'  && structureOne.characters[i+1] == 'l'  && structureOne.characters[i+2] == 'o' && structureOne.characters[i+3] == 'a' && structureOne.characters[i+4] == 't' && structureOne.characters[i+5] == ' '){
@@ -131,24 +150,29 @@ void checkDataType() {
                 structureOne.numOfDouble += 1;
             }else if (structureOne.characters[i] == 'F'  && structureOne.characters[i+1] == 'I'  && structureOne.characters[i+2] == 'L' && structureOne.characters[i+3] == 'E' && structureOne.characters[i+4] == ' '){
                 structureOne.numOfFile += 1;
-                int j = i + 5;
-                findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction, structureOne.numOfArray, structureOne.numOfPointer);
+                int j = i + 3;
+                int result =findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction, structureOne.numOfArray, structureOne.numOfPointer);
+                increasingFun(result,3);
             }else if (structureOne.characters[i] == 'v'  && structureOne.characters[i+1] == 'o'  && structureOne.characters[i+2] == 'i' && structureOne.characters[i+3] == 'd' && structureOne.characters[i+4] == ' '){
-                int j = i+5;
-                findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction, structureOne.numOfArray, structureOne.numOfPointer);
+                printf("checking void");
+                structureOne.numOfVoid++;
+                int j = i+3;
+                int result = findFunctionArrAndPointer(j,structureOne.characters,structureOne.numOfFunction, structureOne.numOfArray, structureOne.numOfPointer);
+                increasingFun(result,3);
             }
 
        }else if (gIndex == 1) {
             if (structureTwo.characters[i] == 'i'  && structureTwo.characters[i+1] == 'n'  && structureTwo.characters[i+2] == 't' && structureTwo.characters[i+3] == ' '){
                 structureTwo.numOfInt += 1;
-                int j = i + 4;
-                findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction, structureTwo.numOfArray, structureTwo.numOfPointer);
+                int j = i + 2;
+                int result = findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction, structureTwo.numOfArray, structureTwo.numOfPointer);
 
+                increasingFun(result,2);
             }else if (structureTwo.characters[i] == 'c'  && structureTwo.characters[i+1] == 'h'  && structureTwo.characters[i+2] == 'a' && structureTwo.characters[i+3] == 'r' && structureTwo.characters[i+4] == ' '){
                 structureTwo.numOfChar += 1;
-                int j = i + 5;
-                findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction,structureTwo.numOfArray, structureTwo.numOfPointer);
-
+                int j = i + 3;
+                int result =findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction,structureTwo.numOfArray, structureTwo.numOfPointer);
+                increasingFun(result,1);
             }else if (structureTwo.characters[i] == 's'  && structureTwo.characters[i+1] == 't'  && structureTwo.characters[i+2] == 'r' && structureTwo.characters[i+3] == 'u' && structureTwo.characters[i+4] == 'c' && structureTwo.characters[i+5] == 't' && structureTwo.characters[i+6] == ' ') {
                 structureTwo.numOfStruct += 1;
             }else if (structureTwo.characters[i] == 'f'  && structureTwo.characters[i+1] == 'l'  && structureTwo.characters[i+2] == 'o'  && structureTwo.characters[i+3] == 'a' && structureTwo.characters[i+4] == 't' && structureTwo.characters[i+5] == ' '){
@@ -157,11 +181,14 @@ void checkDataType() {
                 structureTwo.numOfDouble += 1;
             }else if (structureTwo.characters[i] == 'F'  && structureTwo.characters[i+1] == 'I'  && structureTwo.characters[i+2] == 'L' && structureTwo.characters[i+3] == 'E' && structureTwo.characters[i+4] == ' '){
                 structureTwo.numOfFile += 1;
-                int j = i+5;
-                findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction,structureTwo.numOfArray, structureTwo.numOfPointer);
-            }else if (structureOne.characters[i] == 'v'  && structureOne.characters[i+1] == 'o'  && structureOne.characters[i+2] == 'i' && structureOne.characters[i+3] == 'd' && structureOne.characters[i+4] == ' '){
-                int j = i+5;
-                findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction,structureTwo.numOfArray, structureTwo.numOfPointer);
+                int j = i+3;
+                int result  = findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction,structureTwo.numOfArray, structureTwo.numOfPointer);
+                increasingFun(result,3) ;
+            }else if (structureTwo.characters[i] == 'v'  && structureTwo.characters[i+1] == 'o'  && structureTwo.characters[i+2] == 'i' && structureTwo.characters[i+3] == 'd' && structureTwo.characters[i+4] == ' '){
+                structureTwo.numOfVoid++;
+                int j = i+3;
+                int result = findFunctionArrAndPointer(j,structureTwo.characters,structureTwo.numOfFunction,structureTwo.numOfArray, structureTwo.numOfPointer);
+                increasingFun(result,3);
             }
         }
     }
@@ -204,36 +231,142 @@ void compare() {
 };
 
 
-void findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArray, int numOfPointer) {
+int findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArray, int numOfPointer) {
     while (arr[j+1] != '=') {
-        if (arr[j] == '('){
-            ++numOfFunction;
-            if (gIndex == 0){
-                structureOne.numOfFunction = numOfFunction;
-            }else if (gIndex == 1){
-                structureTwo.numOfFunction = numOfFunction;
+        j++;
+        if (arr[j] == '(') {
+            int k = j;
+            printf("k => %d", k);
+            while (arr[k + 1] != '=' || arr[k + 1] != ';') {
+                if (arr[k] = ')') {
+                    if (gIndex == 0) {
+                        numOfFunction++;
+                        structureOne.numOfFunction = numOfFunction;
+                    } else if (gIndex == 1) {
+                        numOfFunction++;
+                        structureTwo.numOfFunction = numOfFunction;
+                    }
+                    return 1;
+                }
+                k++;
             }
-            break;
-        }else if (arr[j] == '['){
-            numOfArray++;
-            if (gIndex == 0){
-                structureOne.numOfArray = numOfArray;
-            }else if (gIndex == 1){
-                structureTwo.numOfArray = numOfArray;
+
+        } else if (arr[j] == '[') {
+            int k = j;
+            while (arr[k] != '=' || arr[k] != ';') {
+                if (arr[k] = ']') {
+                    if (gIndex == 0) {
+                        numOfArray++;
+                        structureOne.numOfArray = numOfArray;
+                    } else if (gIndex == 1) {
+                        numOfArray++;
+                        structureTwo.numOfArray = numOfArray;
+                    }
+                    return 2;
+                }
+                k++;
             }
-            break;
-        }else if (arr[j] == '*') {
-            numOfPointer++;
-            if (gIndex == 0){
+        } else if (arr[j] == '*') {
+            if (gIndex == 0) {
+                numOfPointer++;
                 structureOne.numOfPointer = numOfPointer;
-            }else if (gIndex == 1){
+            } else if (gIndex == 1) {
+                numOfPointer++;
                 structureTwo.numOfPointer = numOfPointer;
             }
-            break ;
+            return 3;
         }
-        j++;
+    }
+
+void checkArrayType(int arrType) {
+    switch (arrType) {
+        case 1:
+            if (gIndex == 0){
+                structureOne.numOfCharArray += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfCharArray += 1;
+            }
+            break;
+        case 2:
+            if (gIndex == 0){
+                structureOne.numOfIntArray += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfIntArray += 1;
+            }
+            break;
     }
 }
+
+void checkPointerType(int pointerType) {
+    switch (pointerType) {
+        case 1:
+            if (gIndex == 0){
+                structureOne.numOfCharPointer += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfCharPointer += 1;
+            }
+            break;
+        case 2:
+            printf("reading intPointer %d\n",gIndex);
+            if (gIndex == 0){
+
+                structureOne.numOfIntPointer += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfIntPointer += 1;
+            }
+            break;
+        case 3:
+            if (gIndex == 0){
+                structureOne.numOfFilePointer += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfFilePointer += 1;
+            }
+            break;
+    }
+}
+
+void checkFunctionType(int functionType) {
+    switch (functionType) {
+        case 1:
+            if (gIndex == 0){
+                structureOne.numOfCharFunction += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfCharFunction+= 1;
+            }
+            break;
+        case 2:
+            if (gIndex == 0){
+                structureOne.numOfIntFunction += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfIntFunction += 1;
+            }
+            break;
+        case 3:
+            if (gIndex == 0){
+                structureOne.numOfVoidFunction += 1;
+            }else if (gIndex == 1){
+                structureTwo.numOfVoidFunction += 1;
+            }
+            break;
+    }
+}
+
+void increasingFun(int result, int type){
+
+
+    switch (result) {
+        case 1:
+            checkFunctionType(type);
+            break;
+        case 2:
+            checkArrayType(type);
+            break;
+        case 3:
+            checkPointerType(type);
+            break;
+    }
+        }
+
 
 int calculateEachPercentage (int numOne, int numTwo) {
     int percent;

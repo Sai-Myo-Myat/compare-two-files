@@ -1,48 +1,38 @@
-#include "iostream"
 
-using namespace std;
+int a = 0;
 
-struct mystruct{
-
-}
-
-struct aa {
+int aa(){
 
 }
 
-int *fprt;
-char *cptr;
+char bb(){}
 
-class MyClass{
+void cde(){
 
-public:
-    int age;
-    string name;
-    int amount;
-    MyClass(int dage , string dname , int damount){
-    double aa;
-        age = dage ;
-        name = dname;
-        amount = damount;
-        getData();
-        char mgmg='a';
-        char mg='b';
-        int *ff;
-        FILE *fpt;
-        int a=0;
-    }
-    void getData(){
-
-        cout<<"age"<<age<<endl;
-        cout<<"name"<<name<<endl;
-        cout<<"amount"<<amount<<endl;
-
-    }
-};
-
-int main(){
-
-    MyClass obj(20 , "mgmg" , 100);
-
-    return 0;
 }
+
+char aa() {
+
+
+}
+
+int cc[];
+
+FILE *fptr;
+
+float aa;
+
+char ee[];
+
+double zz;
+
+int *pp;
+
+char *aaa;
+
+struct qq{
+
+}
+int eee[];
+
+
