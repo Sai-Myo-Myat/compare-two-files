@@ -35,17 +35,26 @@ struct structureTwo {
     int percentOfStruct = 0;
     int percentOfFloat = 0;
     int percentOfDouble = 0;
+    int percentOfVoid = 0;
     int percentOfFile =0;
     int percentOfFunction = 0;
     int percentOfArray = 0;
     int percentOfPointer = 0;
+    int percentOfCharArr = 0;
+    int percentOfIntArr=0;
+    int percentOfCharFun=0;
+    int percentOfIntFun=0;
+    int percentOfVoidFun =0;
+    int percentOfIntPointer =0;
+    int percentOfCharPointer = 0;
+    int percentOfFilePointer = 0;
 } percentStruct;
 
 struct structure structureOne;
 struct structure structureTwo;
 
 int gIndex = 0;
-int fullPercentage = 1000;
+int fullPercentage = 1900;
 int percentage;
 
 void readFile (char fileName[100]);
@@ -220,6 +229,8 @@ void compare() {
     percentStruct.percentOfFloat = percent;
     percent = calculateEachPercentage(structureOne.numOfDouble,structureTwo.numOfDouble);
     percentStruct.percentOfDouble = percent;
+    percent = calculateEachPercentage(structureOne.numOfVoid,structureTwo.numOfVoid);
+    percentStruct.percentOfVoid = percent;
     percent = calculateEachPercentage(structureOne.numOfFile,structureTwo.numOfFile);
     percentStruct.percentOfFile = percent;
     percent = calculateEachPercentage(structureOne.numOfFunction,structureTwo.numOfFunction);
@@ -228,6 +239,23 @@ void compare() {
     percentStruct.percentOfArray = percent;
     percent = calculateEachPercentage(structureOne.numOfPointer,structureTwo.numOfPointer);
     percentStruct.percentOfPointer = percent;
+    percent = calculateEachPercentage(structureOne.numOfCharArray,structureTwo.numOfCharArray);
+    percentStruct.percentOfCharArr = percent;
+    percent = calculateEachPercentage(structureOne.numOfIntArray,structureTwo.numOfIntArray);
+    percentStruct.percentOfIntArr = percent;
+    percent = calculateEachPercentage(structureOne.numOfIntPointer,structureTwo.numOfIntPointer);
+    percentStruct.percentOfIntPointer = percent;
+    percent = calculateEachPercentage(structureOne.numOfCharPointer,structureTwo.numOfCharPointer);
+    percentStruct.percentOfCharPointer = percent;
+    percent = calculateEachPercentage(structureOne.numOfFilePointer,structureTwo.numOfFilePointer);
+    percentStruct.percentOfFilePointer = percent;
+    percent = calculateEachPercentage(structureOne.numOfCharFunction,structureTwo.numOfCharFunction);
+    percentStruct.percentOfCharFun = percent;
+    percent = calculateEachPercentage(structureOne.numOfIntFunction,structureTwo.numOfIntFunction);
+    percentStruct.percentOfIntFun  = percent;
+    percent = calculateEachPercentage(structureOne.numOfVoidFunction,structureTwo.numOfVoidFunction);
+    percentStruct.percentOfVoidFun = percent;
+
 };
 
 
@@ -236,7 +264,6 @@ int findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArr
         j++;
         if (arr[j] == '(') {
             int k = j;
-            printf("k => %d", k);
             while (arr[k + 1] != '=' || arr[k + 1] != ';') {
                 if (arr[k] = ')') {
                     if (gIndex == 0) {
@@ -385,9 +412,11 @@ int calculateEachPercentage (int numOne, int numTwo) {
 
 void  calculatePercentage () {
     int comparedPercent = percentStruct.percentOfStruct + percentStruct.percentOfChar
-                        + percentStruct.percentOfInt + percentStruct.percentOfAlpha + percentStruct.percentOfFloat
+                        + percentStruct.percentOfInt + percentStruct.percentOfAlpha + percentStruct.percentOfFloat + percentStruct.percentOfVoid
                         + percentStruct.percentOfDouble + percentStruct.percentOfFile + percentStruct.percentOfFunction
-                        + percentStruct.percentOfArray + percentStruct.percentOfPointer;
+                        + percentStruct.percentOfArray + percentStruct.percentOfPointer + percentStruct.percentOfIntArr + percentStruct.percentOfCharArr
+                        + percentStruct.percentOfIntFun + percentStruct.percentOfCharFun + percentStruct.percentOfVoidFun
+                        +percentStruct.percentOfIntPointer + percentStruct.percentOfCharPointer + percentStruct.percentOfFilePointer;
     percentage = (comparedPercent*100)/fullPercentage;
     printf("%d (percent) same!!\n",percentage);
 }

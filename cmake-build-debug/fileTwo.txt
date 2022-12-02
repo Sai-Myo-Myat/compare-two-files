@@ -7,6 +7,10 @@ int aa(){
 
 char bb(){}
 
+
+int aa[];
+char bb(){}
+
 void cde(){
 
 }
