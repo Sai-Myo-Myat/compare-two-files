@@ -232,7 +232,7 @@ void compare() {
 
 
 int findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArray, int numOfPointer) {
-    while (arr[j+1] != '=') {
+    while (arr[j + 1] != '=') {
         j++;
         if (arr[j] == '(') {
             int k = j;
@@ -277,6 +277,7 @@ int findFunctionArrAndPointer(int j, char arr[], int numOfFunction, int numOfArr
             return 3;
         }
     }
+}
 
 void checkArrayType(int arrType) {
     switch (arrType) {
